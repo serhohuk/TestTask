@@ -13,5 +13,11 @@
         <action
             android:id="@+id/action_mainFragment_self"
             app:destination="@id/mainFragment" />
+        <argument
+            android:name="fragmentNumber"
+            app:argType="integer" />
     </fragment>
+    <argument
+        android:name="fragmentNumber"
+        android:defaultValue="0" />
 </navigation>
