@@ -20,4 +20,9 @@
     <argument
         android:name="fragmentNumber"
         android:defaultValue="0" />
+    <fragment
+        android:id="@+id/viewPagerFragment"
+        tools:layout="@layout/fragment_view_pager_layout"
+        android:name="com.sign.pecodesoftwaretest.ViewPagerFragment"
+        android:label="ViewPagerFragment" />
 </navigation>
