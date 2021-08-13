@@ -3,25 +3,15 @@ package com.sign.pecodesoftwaretest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.nfc.Tag
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
 import com.sign.pecodesoftwaretest.Constants.CHANNEL_ID
 import com.sign.pecodesoftwaretest.Constants.CHANNEL_NAME
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_main_layout.*
-import kotlinx.android.synthetic.main.fragment_main_layout.view.*
 
 class MainFragment : Fragment(R.layout.fragment_main_layout) {
 
@@ -31,7 +21,6 @@ class MainFragment : Fragment(R.layout.fragment_main_layout) {
         super.onViewCreated(view, savedInstanceState)
 
         val viewPagerAdapter = (activity as MainActivity).adapter
-        val viewPager = activity?.findViewById<ViewPager2>(R.id.viewpager)
 
         createNotificationChannel()
 
@@ -39,12 +28,11 @@ class MainFragment : Fragment(R.layout.fragment_main_layout) {
             .setContentTitle("Chat heads active")
             .setSmallIcon(R.drawable.ic_brightness)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
-
+            .setContentIntent((activity as MainActivity).pendingIntent)
 
         val notiFicationManager = NotificationManagerCompat.from(requireContext())
 
         btn_create_notification.setOnClickListener {
-            Log.e("STARTED","$itemPosition")
             notification.setContentText("Notification ${itemPosition}")
             notiFicationManager.notify(itemPosition,notification.build())
         }
@@ -61,11 +49,9 @@ class MainFragment : Fragment(R.layout.fragment_main_layout) {
 
     }
 
-
     fun setTextNum(string: String){
         tv_num.text = string
     }
-
 
     fun hideRemoveButton(){
         if (tv_num.text.toString()=="1"){
